@@ -1,0 +1,98 @@
+Bi_tree :   STRUCT
+                VAL : data; 
+                LC : ^Bi_tree;
+                RC : ^Bi_tree; 
+            END_STRUCT
+
+FUNCTION countNode(tree:BiTree) :INTEGER
+VAR
+    result:INTEGER:=1
+BEGIN
+      
+      IF (tree=NULL) THEN
+          return result;
+      END_IF
+      result:=1
+      IF (tree^.LC<>NULL ) THEN
+          result=result+countNode(tree^.LC)
+      END_IF
+      IF (tree^.RC<>NULL) THEN
+          result=result+countNode(tree^.RC)
+      END_IF
+     return result
+      
+END
+
+FUNCTION Height(tree:BiTree):Integer
+VAR
+    result:INTEGER:=1
+    hl:INTEGER
+    hr:INTEGER
+BEGIN
+      
+      IF (tree=NULL) THEN
+          return 0;
+      END_IF
+      hl:=Height(tree^.LC)
+      hr:=Height(tree^RC)
+      IF (hl>hr) THEN
+          return 1+hl
+      ELSE
+          return 1+hr
+      END_IF
+      
+      
+END
+
+
+FUNCTION LeaftCount(tree:Bi_tree) : INTEGER
+VAR
+   
+BEGIN
+    IF (tree=NULL) THEN
+        return 0
+    END_IF
+    IF (tree^.LC=NULL AND tree^.RC=NULL) THEN
+        return 1
+  
+    ELSE
+         return LeaftCount(tree^.LC)+  
+            LeaftCount(tree^.RC); 
+    END_IF
+END
+FUNCTION findMax(tree:Bi_tree) : INTEGER
+VAR
+   val:INTEGER;
+   lres:INTEGER;
+   Rres:INTEGER
+
+BEGIN
+   if(Bi_tree===NULL)
+      return 0
+  val:=tree.VAL
+  lres:= findMax(node.left); 
+  Rres:= findMax(node.right);
+  IF (Lres>val) THEN
+        val:=Lres
+  END_IF
+   IF (Rres>val) THEN
+        val:=Rres
+  END_IF
+  return val;  
+FUNCTION fullbinary(tree:Bi_tree) : BOOLEAN
+VAR
+    
+BEGIN
+   IF (tree=NULL)
+     return true
+   END_IF
+   IF(tree^.LC=NULL AND tree^.RC=NULL)
+    
+     return true
+   END_IF
+
+    IF(tree^.LC<>NULL AND tree^.RC<>NULL)
+     return (fullbinary(tree^.LC) AND isFullTree(tree^.RC));
+    END_IF
+    return false
+END
